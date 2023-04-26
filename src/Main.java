@@ -29,11 +29,11 @@ public class Main {
         System.out.println("Список фамилий призывников: " + conscripts);
 
         // Задание 3: Получить отсортированный по фамилии список потенциально работоспособных людей с высшим образованием
-        List<Person> workingAgePeople = persons.stream()
-                .filter(p -> p.getEducation() == Education.HIGHER)
-                .filter(p -> (p.getSex() == Sex.WOMAN && p.getAge() >= 18 && p.getAge() <= 60) ||
-                        (p.getSex() == Sex.MAN && p.getAge() >= 18 && p.getAge() <= 65))
+        List<Person> workingPeople = persons.stream()
+                .filter(person -> person.getEducation() == Education.HIGHER)
+                .filter(person -> person.getAge() >= 18)
+                .filter(person -> person.getSex() == Sex.WOMAN ? person.getAge() <= 60 : person.getAge() <= 65)
                 .sorted(Comparator.comparing(Person::getFamily)).toList();
-        System.out.println("Список потенциально работоспособных людей с высшим образованием: " + workingAgePeople);
+        System.out.println("Список потенциально работоспособных людей с высшим образованием: " + workingPeople);
     }
 }
